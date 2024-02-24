@@ -1,0 +1,30 @@
+name: build-and-push
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # This step checkouts the code of the repository
+        
+      - name: Setup Cog
+        uses: replicate/setup-cog@v1
+        with:
+          token: ${{ secrets.REPLICATE_API_TOKEN }}
+
+      - name: Download weights
+        run: |
+          chmod +x script/download-weights  # Ensure script has execute permissions
+          cog run script/download-weights
+
+      - name: Push to Replicate
+        run: cog push r8.im/dhanushreddy291/sdxl-lightning-2step
