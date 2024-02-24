@@ -1,18 +1,12 @@
-# Configuration for Cog ⚙️
-# Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
-
+# Configuration for Cog
 build:
   gpu: true
-  python_version: "3.11"
+  python_version: "3.10"
   python_packages:
-    - "accelerate"
-    - "diffusers"
-    - "torch==2.0.1"
-    - "torchvision==0.15.2"
-    - "transformers"
-
-  run:
-    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.6.2/pget_linux_x86_64" && chmod +x /usr/local/bin/pget
+    - "torch==2.0.0"
+    - "diffusers==0.26.3"
+    - "transformers==4.38.1"
+    - "accelerate==0.27.2"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
